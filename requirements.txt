@@ -1,0 +1,9 @@
+numpy
+scipy
+sklearn
+pandas
+#matplotlib
+keras
+#tensorflow
+h5py
+#jupyter
