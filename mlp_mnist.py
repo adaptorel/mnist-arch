@@ -25,8 +25,6 @@ def train(lr=0.0075, nb_epoch=10, batch_size=512, verbose=1):
     model.add(Dense(10, activation='softmax'))
     model.compile(optimizer=RMSprop(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
-    model.summary()
-
     model.fit(X_train, y_train, nb_epoch=nb_epoch, batch_size=batch_size, validation_data=(X_test, y_test),
               callbacks=callbacks(), verbose=verbose)
     score = model.evaluate(X_test, y_test, verbose=0)
