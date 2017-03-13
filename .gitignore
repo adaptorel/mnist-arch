@@ -1,3 +1,6 @@
 .idea
 *.pyc
 venv
+
+#MacOS shit
+.DS_Store
