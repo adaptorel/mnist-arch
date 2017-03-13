@@ -18,7 +18,7 @@ def build_partial_mlp_model(depth=12, wide_factor=22, dropout=0.15, init_mode='l
     return deep_model
 
 
-def train(lr=0.0075, nb_epoch=10, batch_size=256, verbose=1):
+def train(lr=0.0075, nb_epoch=5, batch_size=256, verbose=1):
     X_train, y_train, X_test, y_test = build_training_data()
     model = build_partial_mlp_model()
 
