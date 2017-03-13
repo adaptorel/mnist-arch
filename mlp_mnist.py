@@ -1,7 +1,7 @@
 from keras.models import Sequential
 from keras.layers import Dense, BatchNormalization, Dropout, Flatten
 from keras.optimizers import RMSprop
-from utils import build_training_data, callbacks
+from utils import build_training_data, callbacks, plot_results
 
 
 def build_partial_mlp_model(depth=12, wide_factor=22, dropout=0.15, init_mode='lecun_uniform', activation='relu'):
@@ -25,12 +25,14 @@ def train(lr=0.0075, nb_epoch=10, batch_size=256, verbose=1):
     model.add(Dense(10, activation='softmax'))
     model.compile(optimizer=RMSprop(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(X_train, y_train, nb_epoch=nb_epoch, batch_size=batch_size, validation_data=(X_test, y_test),
-              callbacks=callbacks(), verbose=verbose)
+    history = model.fit(X_train, y_train, nb_epoch=nb_epoch, batch_size=batch_size, validation_data=(X_test, y_test),
+                        callbacks=callbacks(), verbose=verbose)
     score = model.evaluate(X_test, y_test, verbose=0)
 
     print('Test score:', score[0])
     print('Test accuracy:', score[1])
+
+    plot_results(history, score[1], 'mlp')
 
 
 if __name__ == '__main__':
