@@ -7,8 +7,8 @@ from utils import build_training_data
 from mlp_mnist import build_partial_mlp_model
 from lstm_mnist import build_partial_lstm_model
 
-
-def train(lr=0.0075, nb_epoch=10, batch_size=512, verbose=1):
+# The merge arch will sometimes not converge, it's Tween Peaks, usually changing a parameter, any of them, will nudge it to converge
+def train(lr=0.0075, nb_epoch=10, batch_size=256, verbose=1):
     X_train, y_train, X_test, y_test = build_training_data()
     model = Sequential()
 
@@ -16,6 +16,8 @@ def train(lr=0.0075, nb_epoch=10, batch_size=512, verbose=1):
     mlp = build_partial_mlp_model()
 
     # To SUM you'll have to match the outputs of the partial networks to be the same size, aka 64 as it is now
+    # Also to be able to SUM/MEAN etc. we need to oversize the LSTM a bit to match the output of the MLP so if
+    # the LSTM overfits a bit at the end, now you know why
     # model.add(Merge([mlp, lstm], mode='sum'))
     # Concat will work with different sizes
     model.add(Merge([mlp, lstm], mode='concat'))

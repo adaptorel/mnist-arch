@@ -5,14 +5,16 @@ from keras.optimizers import RMSprop
 from utils import build_training_data, callbacks
 
 
-def build_partial_lstm_model(neurons=32, dropout=0.45):
+def build_partial_lstm_model(neurons=44, dropout=0.45):
     lstm_model = Sequential()
-    lstm_model.add(Bidirectional(LSTM(neurons, dropout_W=dropout), merge_mode='concat', input_shape=(28, 28)))
+    # It seems that the Bidirectional does a bit better and it's convergence is less 'jittery'
+    # lstm_model.add(Bidirectional(LSTM(neurons, dropout_W=dropout), merge_mode='concat', input_shape=(28, 28)))
+    lstm_model.add(LSTM(2* neurons, dropout_W=dropout, input_shape=(28, 28)))
     lstm_model.add(Dropout(dropout))
     return lstm_model
 
 
-def train(lr=0.0075, nb_epoch=10, batch_size=512, verbose=1):
+def train(lr=0.0075, nb_epoch=10, batch_size=256, verbose=1):
     X_train, y_train, X_test, y_test = build_training_data()
 
     lstm_model = build_partial_lstm_model()

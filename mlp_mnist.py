@@ -4,7 +4,7 @@ from keras.optimizers import RMSprop
 from utils import build_training_data, callbacks
 
 
-def build_partial_mlp_model(depth=12, wide_factor=16, dropout=0.15, init_mode='lecun_uniform', activation='relu'):
+def build_partial_mlp_model(depth=12, wide_factor=22, dropout=0.15, init_mode='lecun_uniform', activation='relu'):
     deep_model = Sequential()
     deep_model.add(Flatten(input_shape=(28, 28)))
     deep_model.add(BatchNormalization())
@@ -18,7 +18,7 @@ def build_partial_mlp_model(depth=12, wide_factor=16, dropout=0.15, init_mode='l
     return deep_model
 
 
-def train(lr=0.0075, nb_epoch=10, batch_size=512, verbose=1):
+def train(lr=0.0075, nb_epoch=10, batch_size=256, verbose=1):
     X_train, y_train, X_test, y_test = build_training_data()
     model = build_partial_mlp_model()
 
