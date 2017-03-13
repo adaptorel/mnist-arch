@@ -7,7 +7,7 @@ from utils import build_training_data
 from mlp_mnist import build_partial_mlp_model
 from lstm_mnist import build_partial_lstm_model
 
-# The merge arch will sometimes not converge, it's Tween Peaks, usually changing a parameter, any of them, will nudge it to converge
+# The merge arch will sometimes not converge, it's Twin Peaks, usually changing a parameter, any of them, will nudge it to converge
 def train(lr=0.0075, nb_epoch=10, batch_size=256, verbose=1):
     X_train, y_train, X_test, y_test = build_training_data()
     model = Sequential()
